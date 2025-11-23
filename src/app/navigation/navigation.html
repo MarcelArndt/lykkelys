@@ -1,0 +1,17 @@
+<div class="navigation-wrapper" [ngClass]="menuState ? 'open' : 'close'" >
+    <div (click)="toggleMenu()" class="navi-button" [ngClass]="menuState ? 'open' : 'close'">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav class="menu" [ngClass]="menuState ? 'open' : 'close'">
+        <ul>
+            <li routerLink="">Main</li>
+            <li routerLink="buttons"> Buttons</li>
+            <li routerLink="sliders">Sliders</li>
+            <li routerLink="cards">Cards</li>
+            <li routerLink="inputs">Dynamic Input</li>
+            <li routerLink="more">More</li>
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,19 @@
+<section class="tabs-wrapper">
+    <div class="tabs-selektor-area">
+        <ul>
+            @for (code of codeBlocks; track code; let index = $index){
+                <li (click)="selectTab(index)">{{code.label}}</li>
+            }
+
+        </ul>
+    </div>
+
+    <div class="code-wrapper">
+        @for (code of codeBlocks; track code; let index = $index) {
+        <pre  [ngClass]="index == activeIndex? 'open' : 'close'"><code [class]="'language-' + code.language"  [innerHTML]="code.highlighted"></code></pre>
+        } @empty {
+        <li>There are no items.</li>
+        }
+        
+    </div>
+</section>

@@ -1,0 +1,138 @@
+
+<section>
+
+    <h1>DynamicInput</h1>
+   
+   <h2>Wiederverwendbare Input-Komponente für Reactive Forms</h2>
+    <p>
+        Die Komponente DynamicInput stellt ein flexibles Eingabefeld bereit, das vollständig in Angular-Reactive-Forms integrierbar ist. Sie eignet sich besonders für Login- und Registrierungsformulare, da Validierung, Placeholder, Autocomplete und Passwort-Sichtbarkeit automatisch gesteuert werden. Die Komponente implementiert <code class="code">ControlValueAccessor</code> und <code>NG_VALIDATORS</code>, wodurch sie sich wie ein reguläres Angular-FormControl verhält.
+    </p>
+
+    <h2>Funktionen</h2>
+    <p>Über das Input-Attribut <code>type</code>wird aus der internen Registry eine passende Konfiguration geladen:</p>
+    
+    <ul>
+        <li>Label/Placeholder</li>
+        <li>HTML-Input-Typ</li>
+        <li>Regex-Validierung</li>
+        <li>Autocomplete</li>
+        <li>Regex-Validierung</li>
+        <li>Name-Attribut</li>
+        <li>Optionales Confirm-Passwort-Feld</li>
+    </ul>
+
+    <p>Unterstützte Typen (erweiterbar):</p>
+
+    <ul>
+        <li>username</li>
+        <li>password</li>
+        <li>email</li>
+        <li>text</li>
+    </ul>
+
+    <p>Jede Typdefinition enthält ein Regex-Pattern, das das Eingabefeld automatisch validiert.</p>
+
+
+    <h2>Integrierte Validierung</h2>
+    <p>Die Komponente validiert:</p>
+
+    <ul>
+        <li>das Regex-Pattern des gewählten Typs</li>
+        <li>optional: ob Passwort und Confirm-Passwort übereinstimmen</li>
+    </ul>
+
+    <p>Bei Ungültigkeit liefert <code>validate()</code> passende Fehlerobjekte:</p>
+
+    <ul>
+        <li><code>&#123;patternInvalid: true&#125;</code></li>
+        <li><code>&#123;passwordsNotMatching: true&#125;</code></li>
+    </ul>
+
+    <p>Fehlerzustände werden über <code>hasError</code> sichtbar gemacht und können im Template gestylt werden.</p>
+
+    <h2>Passwort-Sichtbarkeit</h2>
+
+    <p>Für Felder vom Typ <code>password</code> ist ein eingebauter Show/Hide-Button enthalten.</p>
+
+    <ul>
+        <li>Umschalten zwischen <code>"password"</code> und <code>"text"</code></li>
+        <li>Funktioniert für beide Felder, wenn <code>confirmPassword</code> aktiv ist</li>
+    </ul>
+
+    <h2>Confirm-Passwort-Unterstützung</h2>
+    <p>Mit <code>confirmPassword="true"</code> wird automatisch ein zweites Eingabefeld gerendert:</p>
+
+    <ul>
+        <li>Zweck: Passwort erneut eingeben</li>
+        <li>Validierung: vergleicht beide Felder</li>
+        <li>Eigener Placeholder (z. B. Confirm Password)</li>
+    </ul>
+
+    <h2>Kompatibel mit Reactive Forms</h2>
+    <p>Dank <code>ControlValueAccessor</code>kann die Komponente direkt in jedem FormControl verwendet werden:</p>
+    <pre>&lt;dynamic-input formControlName="email" type="email"&gt;&lt;/dynamic-input&gt;</pre>
+    <p>Wertänderungen, Touch-Events und Validierungen werden automatisch an das Formular weitergegeben.</p>
+
+    <h2>Verwendung</h2>
+
+    <pre>
+    &lt;form [formGroup]="myform"&gt;
+        &lt;dynamic-input type="email" name="email" formControlName="email"&gt;&lt;/dynamic-input&gt;
+        &lt;dynamic-input type="username" name="username" formControlName="username"&gt;&lt;/dynamic-input&gt;
+        &lt;dynamic-input type="password" name="password" formControlName="password"&gt;&lt;/dynamic-input&gt;
+    &lt;/form&gt;
+    </pre>
+
+    <h2>Beispiel mit Confirm-Passwort</h2>
+
+    <pre>
+    &lt;dynamic-input type="password" name="password" formControlName="password" confirmPassword="true"&gt;&lt;/dynamic-input&gt;
+    </pre>
+
+    <h2>Erweiterbarkeit</h2>
+
+    <p>Neue Input-Typen können leicht hinzugefügt werden, indem im <code>typeRegistry</code> ein neuer Eintrag ergänzt wird:</p>
+    
+    <pre>
+    &#39;phone&#39;: &#123;
+        label: &#39;Phone&#39;,
+        type: &#39;tel&#39;,
+        validatePattern: /^[0-9]&#123;6,14&#125;$/,
+        name: &#39;phone&#39;,
+        autocomplete: &#39;tel&#39;
+    &#125;
+    </pre>
+
+
+    <h2>Beispiel From</h2>
+    <div class="expample">
+        <div>
+            <form [formGroup]="myform">
+                <dynamic-input type="email" name="email" formControlName="email"></dynamic-input>
+                <dynamic-input type="username" name="username" formControlName="username"></dynamic-input>
+                <dynamic-input type="password" name="password" formControlName="password"></dynamic-input>
+            </form>
+        </div>
+
+        @if(myform.get('username')?.errors?.['patternInvalid'] && myform.get('username')?.touched){
+            <div>
+                Username ist ungültig
+            </div>
+        } @else if(myform.get('password')?.errors?.['patternInvalid'] && myform.get('password')?.touched){
+            <div>
+                Password brauch 8 zeichen
+            </div>
+        } @else if(myform.get('password')?.errors?.['passwordsNotMatching'] && myform.get('password')?.touched){
+            <div>
+                Password stimmt nicht überein
+            </div>
+        }  @else if(myform.get('email')?.errors?.['patternInvalid'] && myform.get('email')?.touched){
+            <div>
+                E-Mail ist nicht gültig
+            </div>
+        }
+    </div>
+
+</section>
+
+<app-tabs-framework></app-tabs-framework>

@@ -1,0 +1,48 @@
+
+
+
+body,html{
+    height: 100%;
+    margin: 0px;
+}
+
+:host{
+    --max-width: 1920px;
+}
+
+.main-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    background-color: #202020;
+}
+
+.container-wrapper{
+width: 100%;
+height: 100%;
+max-width:var(--max-width);
+display: flex;
+flex-wrap: nowrap;
+background-color: white;
+}
+
+content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 96px;
+}
+
