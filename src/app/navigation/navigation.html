@@ -4,14 +4,35 @@
         <span></span>
         <span></span>
     </div>
-    <nav class="menu" [ngClass]="menuState ? 'open' : 'close'">
-        <ul>
-            <li routerLink="">Main</li>
-            <li routerLink="buttons"> Buttons</li>
-            <li routerLink="sliders">Sliders</li>
-            <li routerLink="cards">Cards</li>
-            <li routerLink="inputs">Dynamic Input</li>
-            <li routerLink="more">More</li>
-        </ul>
-    </nav>
+
+    <div class="content-wrapper" [ngClass]="menuState ? 'open' : 'close'">
+        <div class="logo-wrapper">
+            <div class="flex-wrapper">
+                <div class="logo">
+                    <img src="./assets/logo-lykkely.webp">
+                </div>
+                <span>Lyykelys</span>
+            </div>
+                <p>v0.1.0 &#8226; Angular Library</p>
+        </div>
+
+        <nav class="menu" >
+
+            <p>getting Started</p>
+            <ul>
+                <li routerLink="">Start</li>
+                <li routerLink="inputs">Introduction</li>
+            </ul>
+
+            <p>Components</p>
+            <ul>
+                <li routerLink="">Slider</li>
+                <li routerLink="inputs">Dynamic Input</li>
+                <li routerLink="more">Parallax</li>
+                <li routerLink="cards">Cards</li>
+                <li routerLink="cards">Menus</li>
+            </ul>
+        </nav>
+
+    </div>
 </div>
