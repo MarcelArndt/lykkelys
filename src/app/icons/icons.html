@@ -1,0 +1,60 @@
+<section class="content-wrapper">
+        <div class="highlight-box">
+        <h1>Icons</h1>
+    
+        <h2>Material Symbols Outlined-Icons</h2>
+
+        <p>
+            Die <code>IconComponent</code> bietet eine einfache Möglichkeit, Material Symbols Outlined-Icons in deiner Angular-App zu verwenden. Sie kapselt das Icon-Styling und stellt eine saubere, wiederverwendbare Schnittstelle bereit, bei der der Icon-Name über Content Projection eingebettet wird.
+        </p>
+        <p>
+            Die Komponente lädt die Schriftart lokal über ein eingebettetes <code>@font-face</code> und rendert das Icon innerhalb eines zentrierten <code>&#60;span&#62;</code>-Elements.
+        </p>
+    </div>
+
+    <h2>Einsatzgebiet</h2>
+    <p>Diese Komponente eignet sich für Projekte, in denen:</p>
+    <ul>
+        <li>einheitliche Icon-Darstellung benötigt wird</li>
+        <li>Icons zentral gestylt und verwaltet werden sollen</li>
+        <li>Material Symbols Outlined verwendet werden</li>
+        <li>Icons per Content Projection flexibel gesetzt werden sollen</li>
+    </ul>
+
+    <h2>Verwendung</h2>
+    <p>Ein Icon wird als Textinhalt innerhalb des <code>&lt;icon&gt;</code>-Tags übergeben:</p>
+    <p>Eine Lister mit allen Icons von Google ist <a href="https://fonts.google.com/icons" target="_blank">hier</a> zu finden</p>
+    <p>Die benötigte Font dazu ist <a href="icon/assets/fonts/material-symbols-outlined-v213-latin-regular.woff2" download>hier</a> zu finden</p>
+    <pre>
+    &lt;icon id="home-icon"&gt;home&lt;/icon&gt;
+    &lt;icon id="close-btn"&gt;close&lt;/icon&gt;
+    &lt;icon&gt;menu&lt;/icon&gt;
+    </pre>
+
+    <h2>Styling</h2>
+    <p>wichtige Hinweise</p>
+    <ul>
+        <li>Die Schriftart wird lokal eingebunden, daher muss der Pfad in deiner Projektstruktur stimmen.</li>
+        <li>Flex-Layout zentriert das Icon sauber innerhalb des Spans.</li>
+        <li>Die Komponente rendert automatisch immer die definierte Icon-Schriftart.</li>
+    </ul>
+
+    <h2>Component Logic</h2>
+    <p>wichtige Hinweise</p>
+    <ul>
+        <li><code>@Input() id:</code>  Optionales Attribut zur individuellen Identifikation.</li>
+        <li>Die Komponente benötigt keine weiteren Abhängigkeiten.</li>
+    </ul>
+
+    
+    <h2>Vorteile</h2>
+    <ul>
+        <li>leichte Wiederverwendbarkeit</li>
+        <li>einfache Integration in jede Angular-Struktur</li>
+        <li>lokaler Font-Load → unabhängig von CDNs</li>
+        <li>klare Trennung von Template, Style und Logik</li>
+        <li>intuitive Nutzung dank Content Projection</li>
+    </ul>
+
+</section>
+<app-tabs-framework></app-tabs-framework>
