@@ -86,6 +86,11 @@
     list-style: none;
     transition: opacity 0.175s ease-in-out;
 
+    icon{
+        font-weight: 400;
+        margin-right: 1.5rem;
+    }
+
  li{
     display: flex;
     align-items: center;
