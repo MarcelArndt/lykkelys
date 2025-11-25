@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Renderer2, HostListener, QueryList, ViewChildren} from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, HostBinding, QueryList, ViewChildren} from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -15,45 +15,55 @@ export interface image{
   styleUrl: './parallax-framework.scss',
 })
 export class ParallaxFramework {
-  constructor(private renderer: Renderer2){}
+  @Input()customScroller!:string;
+  @Input()background!:string;
   @Input({required:true}) images!:image[]; //Input mit den Bildern die gerendert werden. {src:Url des Bildes, alt:alternativ text, verticalSpeed:wie stark soll das Bild shiften}
   @ViewChild('parallaxContainer') parallaxContainer!:ElementRef; //Element zum hinzufügen/rendern der Bilder
   @ViewChildren('parallax') parallaxImages!: QueryList<ElementRef>;
 
 
-ngAfterViewInit() {
-  gsap.registerPlugin(ScrollTrigger);
-  
-    const scroller = document.querySelector('.content-wrapper') as HTMLElement;
-    ScrollTrigger.config({
-      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
-    });
-    
-    const imagesArray = this.parallaxImages.toArray();
-    
-    imagesArray.forEach((element, index) => {
-      const el = element.nativeElement;
-      const speed = this.images[index].verticalSpeed;
-
-      gsap.fromTo(el, 
-        { y: -10 * speed }, 
-        {
-          y: 20 * speed,
-          ease: "none",
-          scrollTrigger: {
-            trigger: this.parallaxContainer.nativeElement,
-            scroller: scroller,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 0.3,
-          }
-        }
-      );
-    });
-    
-    ScrollTrigger.refresh();
-    
+  @HostBinding('style.--background-color')
+  get backgroundColor(): string {
+    return this.background || 'transparent';
   }
+
+ngAfterViewInit() {
+    gsap.registerPlugin(ScrollTrigger);
+    this.gsapAnimation(this.getScrollTriggerConfig())
+  }
+
+
+  gsapAnimation(scrollTriggerConfig={}){
+      this.parallaxImages.forEach((element, index) => {
+        const image = element.nativeElement;
+        const speed = this.images[index].verticalSpeed;
+
+        gsap.fromTo(image, 
+          { y: 20 * speed }, 
+          {
+            y: -10 * speed,
+            ease: "none",
+            scrollTrigger: scrollTriggerConfig
+          }
+        );
+      });
+  }
+
+  getScrollTriggerConfig(){
+        const scrollTriggerConfig:any = {
+          trigger: this.parallaxContainer.nativeElement,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.5,
+        };
+
+        if(this.customScroller) {
+          scrollTriggerConfig.scroller = document.querySelector(this.customScroller) as HTMLElement;;
+        }
+        
+      return scrollTriggerConfig
+  }
+
 }
 
 
