@@ -1,5 +1,6 @@
-import { Component, Input, ViewChild, ElementRef, Renderer2} from '@angular/core';
-
+import { Component, Input, ViewChild, ElementRef, Renderer2, HostListener, QueryList, ViewChildren} from '@angular/core';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export interface image{
   verticalSpeed:number,
@@ -16,17 +17,47 @@ export interface image{
 export class ParallaxFramework {
   constructor(private renderer: Renderer2){}
   @Input({required:true}) images!:image[]; //Input mit den Bildern die gerendert werden. {src:Url des Bildes, alt:alternativ text, verticalSpeed:wie stark soll das Bild shiften}
-  @ViewChild('imagesContainer') imagesContainer!:ElementRef; //Element zum hinzufügen/rendern der Bilder
+  @ViewChild('parallaxContainer') parallaxContainer!:ElementRef; //Element zum hinzufügen/rendern der Bilder
+  @ViewChildren('parallax') parallaxImages!: QueryList<ElementRef>;
 
 
-  ngAfterViewInit(){
-    console.log(this.images)
+ngAfterViewInit() {
+  gsap.registerPlugin(ScrollTrigger);
+  
+    const scroller = document.querySelector('.content-wrapper') as HTMLElement;
+    ScrollTrigger.config({
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+    });
+    
+    const imagesArray = this.parallaxImages.toArray();
+    
+    imagesArray.forEach((element, index) => {
+      const el = element.nativeElement;
+      const speed = this.images[index].verticalSpeed;
 
-    const newImage = this.renderer.createElement('img');
-    this.renderer.setAttribute(newImage, 'src', this.images[0].src)
-    this.renderer.setAttribute(newImage, 'alt', this.images[0].alt)
-    this.renderer.addClass(newImage, 'parallax-image');
-    this.renderer.appendChild(this.imagesContainer.nativeElement, newImage);
+      gsap.fromTo(el, 
+        { y: -10 * speed }, 
+        {
+          y: 20 * speed,
+          ease: "none",
+          scrollTrigger: {
+            trigger: this.parallaxContainer.nativeElement,
+            scroller: scroller,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.3,
+          }
+        }
+      );
+    });
+    
+    ScrollTrigger.refresh();
+    
   }
-
 }
+
+
+
+
+
+

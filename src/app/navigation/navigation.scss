@@ -76,7 +76,7 @@
     }
 }
 
-.content-wrapper.close{
+.navigation-content-wrapper.close{
     scale: 0 1;
     opacity: 0;
     transition:  opacity 0s ease-in-out;
@@ -114,7 +114,7 @@
  }
 }
 
-.content-wrapper{
+.navigation-content-wrapper{
     position: absolute;
     top: 96px;
     left: 24px;
