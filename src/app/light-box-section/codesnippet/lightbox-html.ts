@@ -1,0 +1,9 @@
+export const lightboxHTML = `
+<section class="lightbox-background" #backgound (click)="close()">
+  <div class="lightbox-wrapper" #wrapperBox (click)="stopPropagation($event)">
+    <div #content>
+      <ng-container #host></ng-container>
+    </div>
+  </div>
+</section>
+`

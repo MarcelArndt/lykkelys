@@ -1,3 +1,4 @@
+export const lightboxTS = `
 import { Component, ViewChild, ElementRef, ViewContainerRef, ComponentRef, OnDestroy } from '@angular/core';
 import { LightboxService, LightboxContent } from './lightbox-service';
 import { closeLightboxAnimation, fadeInContent, fadeOutContent, openLightboxAnimation } from './lightbox-gsap';
@@ -119,3 +120,4 @@ export class Lightbox {
   }
 
 }
+`
