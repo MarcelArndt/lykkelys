@@ -1,0 +1,391 @@
+ <div class="highlight-box">
+            <div class="highlight-box-wrapper">
+                <h1>Lightbox</h1>
+                <h2>Dynamischer Modal-Dialog mit GSAP-Animationen</h2>
+                <p>
+                    Die Lightbox-Komponente ist ein fortgeschrittenes Modal-System, das durch einen Service gesteuert wird und beliebige Angular-Komponenten dynamisch laden kann. Mit flüssigen GSAP-Animationen, Content-Switching und einem flexiblen API bietet sie eine professionelle Lösung für Dialoge, Formulare, Bildergalerien und mehr.
+                </p>
+            </div>
+        </div>
+
+        <h2>Hauptmerkmale</h2>
+        <ul>
+            <li><strong>Service-basierte Steuerung:</strong> Öffnen und Schließen über den <code class="code">LightboxService</code> von überall in der Anwendung</li>
+            <li><strong>Dynamisches Component Loading:</strong> Beliebige Angular-Komponenten zur Laufzeit laden</li>
+            <li><strong>Input-Übergabe:</strong> Daten an geladene Komponenten übergeben</li>
+            <li><strong>GSAP-Animationen:</strong> Flüssige Ein-/Ausblend- und Slide-Animationen</li>
+            <li><strong>Content-Switching:</strong> Wechsel zwischen Komponenten mit Fade-Transition (vorwärts/rückwärts)</li>
+            <li><strong>Animation-Lock:</strong> Verhindert Mehrfach-Aktionen während Animationen</li>
+            <li><strong>Backdrop Click:</strong> Schließen durch Klick auf Hintergrund</li>
+            <li><strong>Responsive Design:</strong> Anpassung an verschiedene Bildschirmgrößen</li>
+        </ul>
+
+        <h2>Architektur</h2>
+        <p>Die Lightbox besteht aus drei Hauptkomponenten:</p>
+
+        <h3>1. Lightbox Component</h3>
+        <p>Die Haupt-UI-Komponente, die das Modal-Overlay rendert und Komponenten dynamisch lädt.</p>
+
+        <h3>2. LightboxService</h3>
+        <p>Der Service, der den Zustand verwaltet und die API für externe Steuerung bereitstellt.</p>
+
+        <h3>3. GSAP Animation Functions</h3>
+        <p>Separate Animations-Funktionen für flüssige Übergänge.</p>
+
+        <div class="info-box">
+            <p><strong>Hinweis:</strong> Die Lightbox nutzt <code class="code">ViewContainerRef</code> für dynamisches Component Loading und <code class="code">BehaviorSubject</code> für reaktive State-Verwaltung.</p>
+        </div>
+
+        <h2>LightboxService API</h2>
+        <p>Der Service bietet folgende Methoden zur Steuerung:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Methode</th>
+                    <th>Parameter</th>
+                    <th>Beschreibung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code class="code">open()</code></td>
+                    <td>component: Type&lt;T&gt;, inputs?: object</td>
+                    <td>Öffnet die Lightbox mit der angegebenen Komponente</td>
+                </tr>
+                <tr>
+                    <td><code class="code">close()</code></td>
+                    <td>-</td>
+                    <td>Schließt die Lightbox mit Animation</td>
+                </tr>
+                <tr>
+                    <td><code class="code">prepareSwitchContent()</code></td>
+                    <td>component: Type&lt;T&gt;, inputs?: object, forwards?: boolean</td>
+                    <td>Wechselt zu einer anderen Komponente mit Fade-Animation</td>
+                </tr>
+                <tr>
+                    <td><code class="code">resetContent()</code></td>
+                    <td>-</td>
+                    <td>Entfernt den aktuellen Content</td>
+                </tr>
+                <tr>
+                    <td><code class="code">getIsAnimating()</code></td>
+                    <td>-</td>
+                    <td>Prüft, ob aktuell eine Animation läuft</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Observables</h2>
+        <p>Der Service stellt folgende Observables zur Verfügung:</p>
+
+        <ul>
+            <li><code class="code">isOpen$</code>: Überwacht, ob die Lightbox geöffnet ist</li>
+            <li><code class="code">content$</code>: Überwacht die aktuell geladene Komponente</li>
+            <li><code class="code">isAnimating$</code>: Überwacht den Animations-Status</li>
+            <li><code class="code">isSwitchContent$</code>: Löst Content-Wechsel aus</li>
+        </ul>
+
+        <h2>Verwendung</h2>
+
+        <h3>Schritt 1: Service in Komponente injizieren</h3>
+        <pre>import &#123; LightboxService &#125; from './lightbox-service';
+
+export class MyComponent &#123;
+  constructor(private lightboxService: LightboxService) &#123;&#125;
+&#125;</pre>
+
+        <h3>Schritt 2: Lightbox öffnen</h3>
+        <pre>// Einfaches Öffnen ohne Inputs
+this.lightboxService.open(MyDialogComponent);
+
+// Mit Inputs
+this.lightboxService.open(MyDialogComponent, &#123;
+  title: 'Hallo Welt',
+  userId: 123,
+  data: &#123; name: 'Max' &#125;
+&#125;);</pre>
+
+        <h3>Schritt 3: Lightbox schließen</h3>
+        <pre>// Von außen
+this.lightboxService.close();
+
+// Oder innerhalb der geladenen Komponente
+constructor(private lightboxService: LightboxService) &#123;&#125;
+
+closeDialog() &#123;
+  this.lightboxService.close();
+&#125;</pre>
+
+        <h2>Content Switching</h2>
+        <p>Wechsel zwischen verschiedenen Komponenten mit Slide-Animation:</p>
+
+        <pre>// Vorwärts-Animation (Standard)
+this.lightboxService.prepareSwitchContent(NextComponent, &#123; data: 'xyz' &#125;);
+
+// Rückwärts-Animation
+this.lightboxService.prepareSwitchContent(PreviousComponent, &#123; data: 'abc' &#125;, false);</pre>
+
+        <div class="info-box">
+            <p><strong>Tipp:</strong> Content Switching eignet sich perfekt für mehrstufige Formulare oder Wizards.</p>
+        </div>
+
+        <h2>Beispiel: Login-Dialog</h2>
+        <pre>// login-dialog.component.ts
+@Component(&#123;
+  selector: 'app-login-dialog',
+  template: `
+    &lt;div style="padding: 2rem;"&gt;
+      &lt;h2&gt;&#123; &#123; title &#125;&#125;&lt;/h2&gt;
+      &lt;form&gt;
+        &lt;input type="email" placeholder="Email"&gt;
+        &lt;input type="password" placeholder="Passwort"&gt;
+        &lt;button type="submit"&gt;Anmelden&lt;/button&gt;
+        &lt;button type="button" (click)="close()"&gt;Abbrechen&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  `
+&#125;)
+export class LoginDialogComponent &#123;
+  @Input() title: string = 'Anmelden';
+  
+  constructor(private lightboxService: LightboxService) &#123;&#125;
+  
+  close() &#123;
+    this.lightboxService.close();
+  &#125;
+&#125;
+
+// Von einer anderen Komponente aufrufen
+openLogin() &#123;
+  this.lightboxService.open(LoginDialogComponent, &#123; 
+    title: 'Willkommen zurück!' 
+  &#125;);
+&#125;</pre>
+
+        <h2>Beispiel: Multi-Step Wizard</h2>
+        <pre>// step1.component.ts
+export class Step1Component &#123;
+  constructor(private lightboxService: LightboxService) &#123;&#125;
+  
+  nextStep() &#123;
+    this.lightboxService.prepareSwitchContent(Step2Component, &#123;
+      userData: this.form.value
+    &#125;, true); // true = vorwärts
+  &#125;
+&#125;
+
+// step2.component.ts
+export class Step2Component &#123;
+  @Input() userData: any;
+  
+  constructor(private lightboxService: LightboxService) &#123;&#125;
+  
+  previousStep() &#123;
+    this.lightboxService.prepareSwitchContent(Step1Component, &#123;&#125;, false); // false = rückwärts
+  &#125;
+  
+  submit() &#123;
+    // Verarbeitung...
+    this.lightboxService.close();
+  &#125;
+&#125;</pre>
+
+        <h2>Animationen</h2>
+        <p>Die Lightbox nutzt GSAP für flüssige Animationen:</p>
+
+        <h3>Öffnen-Animation</h3>
+        <ul>
+            <li>Backdrop faded von 0 auf 1 (0.25s)</li>
+            <li>Content-Box slided von unten (150% → -50%, 0.5s)</li>
+            <li>Content faded ein (0.25s)</li>
+        </ul>
+
+        <h3>Schließen-Animation</h3>
+        <ul>
+            <li>Content faded aus (0.25s)</li>
+            <li>Content-Box slided nach unten (-50% → 150%, 0.5s)</li>
+            <li>Backdrop faded aus (0.25s)</li>
+        </ul>
+
+        <h3>Content-Switch Animation</h3>
+        <ul>
+            <li>Alter Content faded horizontal aus (links/rechts je nach Richtung)</li>
+            <li>Neuer Content wird geladen</li>
+            <li>Neuer Content faded horizontal ein (gegengesetzte Richtung)</li>
+        </ul>
+
+        <div class="warning-box">
+            <p><strong>Wichtig:</strong> Während Animationen wird ein Lock gesetzt (<code class="code">isAnimating</code>), um Mehrfach-Aktionen zu verhindern.</p>
+        </div>
+
+        <h2>Styling-Variablen</h2>
+        <p>Die SCSS-Datei definiert anpassbare Variablen:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Standard</th>
+                    <th>Beschreibung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code class="code">$lightbox-background</code></td>
+                    <td>rgba(16, 2, 26, 0.6)</td>
+                    <td>Backdrop-Farbe</td>
+                </tr>
+                <tr>
+                    <td><code class="code">$lightbox-backdrop-blur</code></td>
+                    <td>5px</td>
+                    <td>Hintergrund-Unschärfe</td>
+                </tr>
+                <tr>
+                    <td><code class="code">$lightbox-wrapper-background</code></td>
+                    <td>#ffffff</td>
+                    <td>Content-Box Hintergrund</td>
+                </tr>
+                <tr>
+                    <td><code class="code">$lightbox-border-radius</code></td>
+                    <td>12px</td>
+                    <td>Abrundung der Ecken</td>
+                </tr>
+                <tr>
+                    <td><code class="code">$lightbox-border-thickness</code></td>
+                    <td>24px</td>
+                    <td>Innenabstand/Border</td>
+                </tr>
+                <tr>
+                    <td><code class="code">$lightbox-vertical-padding</code></td>
+                    <td>100px</td>
+                    <td>Vertikaler Abstand oben/unten</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Responsive Verhalten</h2>
+        <p>Die Lightbox passt sich automatisch an:</p>
+
+        <ul>
+            <li><strong>Desktop:</strong> max-width: 1024px, zentriert mit vertikalem Padding</li>
+            <li><strong>Tablet/Mobile (&lt;1000px):</strong> max-height: 92vh, optimierte Positionierung</li>
+            <li><strong>Min-Width:</strong> 320px - 40px (Border + Padding)</li>
+            <li><strong>Scrollbar:</strong> Überlaufender Content ist scrollbar</li>
+        </ul>
+
+        <h2>Lifecycle & Cleanup</h2>
+        <p>Die Komponente kümmert sich automatisch um Cleanup:</p>
+
+        <ul>
+            <li>Zerstört dynamisch geladene Komponenten beim Schließen</li>
+            <li>Cleared ViewContainerRef beim Content-Wechsel</li>
+            <li>Unsubscribed beim <code class="code">ngOnDestroy</code></li>
+        </ul>
+
+        <div class="success-box">
+            <p><strong>Best Practice:</strong> Die Lightbox ist als Singleton-Service konzipiert. Es sollte nur eine Instanz der Lightbox-Komponente in der App existieren (z.B. in <code class="code">app.component.html</code>).</p>
+        </div>
+
+        <h2>Integration in die App</h2>
+        <pre>// app.component.html
+&lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;app-lightbox&gt;&lt;/app-lightbox&gt; &lt;!-- Einmal hier einfügen --&gt;
+
+// app.component.ts
+import &#123; Lightbox &#125; from './lightbox/lightbox';
+
+@Component(&#123;
+  selector: 'app-root',
+  imports: [RouterOutlet, Lightbox],
+  // ...
+&#125;)</pre>
+
+        <h2>Fortgeschrittene Verwendung</h2>
+
+        <h3>Animation-Status überwachen</h3>
+        <pre>this.lightboxService.isAnimating$.subscribe(isAnimating =&gt; &#123;
+  if (isAnimating) &#123;
+    console.log('Animation läuft...');
+  &#125; else &#123;
+    console.log('Animation abgeschlossen');
+  &#125;
+&#125;);</pre>
+
+        <h3>Auf Lightbox-Schließen reagieren</h3>
+        <pre>this.lightboxService.isOpen$.subscribe(isOpen =&gt; &#123;
+  if (!isOpen) &#123;
+    console.log('Lightbox wurde geschlossen');
+    // Cleanup, API-Calls, etc.
+  &#125;
+&#125;);</pre>
+
+        <h3>Eigene Komponente mit Lightbox-Awareness</h3>
+        <pre>export class MyDialogComponent implements OnInit &#123;
+  @Input() data: any;
+  
+  constructor(private lightboxService: LightboxService) &#123;&#125;
+  
+  ngOnInit() &#123;
+    console.log('Empfangene Daten:', this.data);
+  &#125;
+  
+  closeAndSave() &#123;
+    // Daten speichern...
+    this.lightboxService.close();
+  &#125;
+  
+  switchToConfirmation() &#123;
+    this.lightboxService.prepareSwitchContent(ConfirmationComponent, &#123;
+      message: 'Möchten Sie fortfahren?'
+    &#125;);
+  &#125;
+&#125;</pre>
+
+        <h2>Troubleshooting</h2>
+
+        <h3>Lightbox öffnet nicht</h3>
+        <ul>
+            <li>Prüfen, ob <code class="code">&lt;app-lightbox&gt;</code> im Template eingebunden ist</li>
+            <li>Service korrekt injiziert?</li>
+            <li>GSAP installiert? <code class="code">npm install gsap</code></li>
+        </ul>
+
+        <h3>Komponente wird nicht geladen</h3>
+        <ul>
+            <li>Ist die Komponente als <code class="code">standalone</code> oder in einem Modul deklariert?</li>
+            <li>Werden Inputs korrekt übergeben?</li>
+            <li>Console auf Fehler prüfen</li>
+        </ul>
+
+        <h3>Animationen ruckeln</h3>
+        <ul>
+            <li>GSAP korrekt importiert?</li>
+            <li>Browser-Performance prüfen</li>
+            <li>Backdrop-Filter kann auf schwachen Geräten Performance kosten</li>
+        </ul>
+
+        <div class="info-box">
+            <p><strong>Hinweis:</strong> Die Komponente nutzt Custom Events (<code class="code">lightbox:animating</code>) zur Kommunikation zwischen Animationen und Service. Diese sollten nicht manuell ausgelöst werden.</p>
+        </div>
+
+        <h2>Erweiterbarkeit</h2>
+        <p>Die Lightbox kann leicht erweitert werden:</p>
+
+        <ul>
+            <li><strong>Neue Animationen:</strong> Weitere GSAP-Funktionen in <code class="code">lightbox-gsap.ts</code> hinzufügen</li>
+            <li><strong>Themes:</strong> SCSS-Variablen anpassen oder CSS-Custom-Properties nutzen</li>
+            <li><strong>Events:</strong> Eigene Observables im Service hinzufügen</li>
+            <li><strong>Keyboard Support:</strong> ESC-Taste zum Schließen implementieren</li>
+            <li><strong>Focus Management:</strong> Accessibility mit Focus-Trap verbessern</li>
+        </ul>
+
+        <h2>Best Practices</h2>
+        <ul>
+            <li>Verwende <code class="code">prepareSwitchContent()</code> für verwandte Inhalte (z.B. Formular-Steps)</li>
+            <li>Verwende <code class="code">close()</code> und dann <code class="code">open()</code> für komplett unterschiedliche Dialoge</li>
+            <li>Übergebe nur notwendige Daten via Inputs</li>
+            <li>Implementiere eigene Close-Buttons in geladenen Komponenten</li>
+            <li>Nutze den Animation-Lock für User-Feedback</li>
+            <li>Teste auf verschiedenen Bildschirmgrößen</li>
+        </ul>

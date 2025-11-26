@@ -1,39 +1,191 @@
-<app-gird-cards>
+<section>
+ <div class="component-section">
+            <div class="highlight-box">
+                <div class="highlight-box-wrapper">
+                    <h1>Cards</h1>
+                    <h2>Wiederverwendbare Card-Komponente</h2>
+                    <p>
+                        Die Cards-Komponente stellt einen flexiblen Container mit moderner Optik bereit. Sie bietet eine einheitliche Card-Gestaltung mit Schatten, Rahmen und anpassbaren CSS-Variablen. Durch die Verwendung von <code class="code">ng-content</code> kann beliebiger Inhalt eingefügt werden, was die Komponente extrem vielseitig macht.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Funktionen</h2>
+            <p>Die Cards-Komponente bietet folgende Features:</p>
+            
+            <ul>
+                <li>Flexibles Content-Projection-System über <code class="code">ng-content</code></li>
+                <li>Anpassbare Darstellung über CSS-Variablen</li>
+                <li>Moderne Card-Optik mit Schatten und Rahmen</li>
+                <li>Responsive Layout mit Flexbox</li>
+                <li>Zentrierte Inhaltsausrichtung</li>
+            </ul>
+
+            <h2>CSS-Variablen</h2>
+            <p>Die Komponente stellt drei CSS-Variablen zur Verfügung, die das Aussehen anpassen:</p>
+
+            <ul>
+                <li><code class="code">--background</code>: Hintergrundfarbe der Card (Standard: rgb(255, 255, 255))</li>
+                <li><code class="code">--shadow-color</code>: Farbe des Schattens (Standard: rgba(0, 0, 0, 0.12))</li>
+                <li><code class="code">--border-color</code>: Rahmenfarbe (Standard: rgb(227, 227, 227))</li>
+            </ul>
+
+            <h2>Styling-Eigenschaften</h2>
+            <p>Die Card verfügt über folgende visuelle Merkmale:</p>
+
+            <ul>
+                <li>Padding: 1rem vertikal, 2rem horizontal</li>
+                <li>Border-Radius: 0.5rem</li>
+                <li>Box-Shadow: 1px 2px 4px</li>
+                <li>1px solider Rahmen</li>
+                <li>Vollständige Breite (100%)</li>
+            </ul>
+
+            <h2>Verwendung</h2>
+            <p>Grundlegende Verwendung mit beliebigem Content:</p>
+
+            <pre>&lt;cards&gt;
+    &lt;h2&gt;Card Titel&lt;/h2&gt;
+    &lt;p&gt;Beliebiger Inhalt kann hier eingefügt werden.&lt;/p&gt;
+&lt;/cards&gt;</pre>
+
+            <h2>Beispiel mit Styling-Anpassung</h2>
+            <p>Die CSS-Variablen können überschrieben werden, um das Aussehen anzupassen:</p>
+
+            <pre>&lt;cards style="--background: rgb(240, 248, 255); --border-color: rgb(100, 150, 200);"&gt;
+    &lt;h3&gt;Benutzerdefinierte Card&lt;/h3&gt;
+    &lt;p&gt;Diese Card hat eine angepasste Hintergrund- und Rahmenfarbe.&lt;/p&gt;
+&lt;/cards&gt;</pre>
+
+            <h2>Beispiel mit komplexem Inhalt</h2>
+
+            <pre>&lt;cards&gt;
+    &lt;div&gt;
+        &lt;h2&gt;Produktname&lt;/h2&gt;
+        &lt;p&gt;Produktbeschreibung mit Details...&lt;/p&gt;
+        &lt;button&gt;Mehr erfahren&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/cards&gt;</pre>
+
+            <div class="info-box">
+                <p><strong>Tipp:</strong> Die Cards-Komponente funktioniert besonders gut in Kombination mit der GirdCards-Komponente für responsive Layouts.</p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Grid Cards Component -->
+        <div class="component-section">
+            <div class="highlight-box">
+                <div class="highlight-box-wrapper">
+                    <h1>GirdCards</h1>
+                    <h2>Responsive Grid-Layout für Cards</h2>
+                    <p>
+                        Die GirdCards-Komponente stellt ein automatisches Grid-Layout bereit, das Cards optimal anordnet. Durch CSS Grid mit <code class="code">auto-fit</code> und <code class="code">minmax</code> passt sich das Layout automatisch an die verfügbare Breite an. Perfekt für Dashboard-Layouts, Produkt-Übersichten oder Galerie-Ansichten.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Funktionen</h2>
+            <p>Die GirdCards-Komponente bietet folgende Features:</p>
+            
+            <ul>
+                <li>Automatisches responsive Grid-Layout</li>
+                <li>Dynamische Spaltenanzahl basierend auf verfügbarer Breite</li>
+                <li>Minimale Spaltenbreite von 300px</li>
+                <li>Gleichmäßige Abstände zwischen Cards (1rem Gap)</li>
+                <li>Content Projection für beliebige Child-Elemente</li>
+            </ul>
+
+            <h2>Grid-Eigenschaften</h2>
+            <p>Das Grid verwendet folgende CSS-Grid-Konfiguration:</p>
+
+            <ul>
+                <li><code class="code">display: grid</code>: Aktiviert CSS Grid Layout</li>
+                <li><code class="code">grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))</code>: Responsive Spalten</li>
+                <li><code class="code">gap: 1rem</code>: Einheitlicher Abstand zwischen Cards</li>
+                <li><code class="code">justify-content: center</code>: Zentrierte Ausrichtung</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Hinweis:</strong> Die Mindestbreite von 300px stellt sicher, dass Cards auch auf mobilen Geräten gut lesbar bleiben.</p>
+            </div>
+
+            <h2>Responsive Verhalten</h2>
+            <p>Das Grid passt sich automatisch an verschiedene Bildschirmgrößen an:</p>
+
+            <ul>
+                <li><strong>Desktop:</strong> Mehrere Spalten nebeneinander (abhängig von der Breite)</li>
+                <li><strong>Tablet:</strong> 2-3 Spalten</li>
+                <li><strong>Mobile:</strong> 1 Spalte (wenn Breite < 300px + Spacing)</li>
+            </ul>
+
+            <h2>Verwendung</h2>
+            <p>Grundlegende Verwendung mit mehreren Cards:</p>
+
+            <pre>&lt;app-gird-cards&gt;
+    &lt;cards&gt;Card 1 Inhalt&lt;/cards&gt;
+    &lt;cards&gt;Card 2 Inhalt&lt;/cards&gt;
+    &lt;cards&gt;Card 3 Inhalt&lt;/cards&gt;
+&lt;/app-gird-cards&gt;</pre>
+
+            <h2>Beispiel mit vollständigem Dashboard-Layout</h2>
+
+            <pre>&lt;app-gird-cards&gt;
+    &lt;cards&gt;
+        &lt;h3&gt;Benutzer&lt;/h3&gt;
+        &lt;p&gt;Total: 1.234&lt;/p&gt;
+    &lt;/cards&gt;
     
-    <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards>
+    &lt;cards&gt;
+        &lt;h3&gt;Umsatz&lt;/h3&gt;
+        &lt;p&gt;€45.678&lt;/p&gt;
+    &lt;/cards&gt;
+    
+    &lt;cards&gt;
+        &lt;h3&gt;Bestellungen&lt;/h3&gt;
+        &lt;p&gt;567 heute&lt;/p&gt;
+    &lt;/cards&gt;
+    
+    &lt;cards&gt;
+        &lt;h3&gt;Konversionsrate&lt;/h3&gt;
+        &lt;p&gt;3.2%&lt;/p&gt;
+    &lt;/cards&gt;
+&lt;/app-gird-cards&gt;</pre>
 
-    <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards>
+            <h2>Beispiel mit verschachtelten Inhalten</h2>
 
-    <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards>
+            <pre>&lt;app-gird-cards&gt;
+    &lt;cards&gt;
+        &lt;img src="product1.jpg" alt="Produkt 1"&gt;
+        &lt;h4&gt;Produkt 1&lt;/h4&gt;
+        &lt;p&gt;Beschreibung des Produkts&lt;/p&gt;
+        &lt;button&gt;In den Warenkorb&lt;/button&gt;
+    &lt;/cards&gt;
+    
+    &lt;cards&gt;
+        &lt;img src="product2.jpg" alt="Produkt 2"&gt;
+        &lt;h4&gt;Produkt 2&lt;/h4&gt;
+        &lt;p&gt;Beschreibung des Produkts&lt;/p&gt;
+        &lt;button&gt;In den Warenkorb&lt;/button&gt;
+    &lt;/cards&gt;
+&lt;/app-gird-cards&gt;</pre>
 
-        <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards>
+            <h2>Verwendung ohne Cards-Komponente</h2>
+            <p>Das Grid kann auch mit anderen Elementen verwendet werden:</p>
 
-    <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards>
+            <pre>&lt;app-gird-cards&gt;
+    &lt;div class="custom-card"&gt;Element 1&lt;/div&gt;
+    &lt;div class="custom-card"&gt;Element 2&lt;/div&gt;
+    &lt;div class="custom-card"&gt;Element 3&lt;/div&gt;
+&lt;/app-gird-cards&gt;</pre>
 
-    <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards>
+            <div class="info-box">
+                <p><strong>Best Practice:</strong> Kombiniere GirdCards mit der Cards-Komponente für ein konsistentes und professionelles Layout-System.</p>
+            </div>
+        </div>
+
+</section>
 
 
-    <cards>
-        <h1>Test Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-    </cards> 
-       
-</app-gird-cards>
+<app-tabs-framework></app-tabs-framework>

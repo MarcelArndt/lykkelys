@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Icon } from './icon';
+import { Lightbox } from './lightbox';
 
-describe('Icon', () => {
-  let component: Icon;
-  let fixture: ComponentFixture<Icon>;
+describe('Lightbox', () => {
+  let component: Lightbox;
+  let fixture: ComponentFixture<Lightbox>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Icon]
+      imports: [Lightbox]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Icon);
+    fixture = TestBed.createComponent(Lightbox);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

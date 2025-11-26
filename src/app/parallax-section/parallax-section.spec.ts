@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParallaxSection } from './parallax-section';
+import {ParallaxSection} from './parallax-section'
 
 describe('ParallaxSection', () => {
   let component: ParallaxSection;

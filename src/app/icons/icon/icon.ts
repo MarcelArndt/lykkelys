@@ -6,6 +6,6 @@ import { Component , Input} from '@angular/core';
   templateUrl: './icon.html',
   styleUrl: './icon.scss'
 })
-export class IconComponent {
+export class Icon {
   @Input() id: string = '';
 }

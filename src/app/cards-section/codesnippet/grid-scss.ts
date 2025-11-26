@@ -1,0 +1,10 @@
+export const  gridSCSS = `
+
+.grid-cards-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+}
+
+`
