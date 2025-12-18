@@ -1,0 +1,15 @@
+.stars-wrapper{
+    display: flex;
+    justify-content: start;
+    height: 2rem;
+    align-items: center;
+}
+
+.star{
+    fill: #f89e1a;
+    
+}
+
+.empty{
+     fill: #bdbdbd; 
+}

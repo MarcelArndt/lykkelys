@@ -2,9 +2,9 @@ import { Component , Input} from '@angular/core';
 import { TabsDataService } from '../tabs-framework/tabs-data-service';
 import { TabsFramework } from '../tabs-framework/tabs-framework';
 import { CodeBlock } from '../tabs-framework/tabs-framework-types';
-import { iconHTML } from './icon/codesnippet/icon-html';
-import { iconSCSS } from './icon/codesnippet/icon-scss';
-import { iconTS } from './icon/codesnippet/icon-ts';
+import { iconHTML } from './codesnippet/icon-html';
+import { iconSCSS } from './codesnippet/icon-scss';
+import { iconTS } from './codesnippet/icon-ts';
 
 @Component({
   selector: 'app-icon',

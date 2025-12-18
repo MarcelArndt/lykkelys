@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { TabsFramework } from '../tabs-framework/tabs-framework';
-import { DynamicInput } from './dynamic-input/dynamic-input';
+import { DynamicInput } from '../components/dynamic-input/dynamic-input';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TabsDataService } from '../tabs-framework/tabs-data-service';
 import { CodeBlock } from '../tabs-framework/tabs-framework-types';
 
-import { buttonHTML } from './dynamic-input/codesnippet/button-html';
-import { buttonTS } from './dynamic-input/codesnippet/button-ts';
-import { buttonSCSS } from './dynamic-input/codesnippet/button-sccs';
+import { buttonHTML } from './codesnippet/button-html';
+import { buttonTS } from './codesnippet/button-ts';
+import { buttonSCSS } from './codesnippet/button-sccs';
 
-import { inputHTML } from './dynamic-input/codesnippet/input-html';
-import { inputSCSS } from './dynamic-input/codesnippet/input-scss';
-import { inputTS } from './dynamic-input/codesnippet/input-ts';
+import { inputHTML } from './codesnippet/input-html';
+import { inputSCSS } from './codesnippet/input-scss';
+import { inputTS } from './codesnippet/input-ts';
 
 
 @Component({

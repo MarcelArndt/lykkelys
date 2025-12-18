@@ -1,0 +1,111 @@
+@use "../../../styles/index.scss" as *;
+
+.title-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 1.25rem;
+    background-color: white;
+    border-radius: 4px;
+    transition: background-color 0.125s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        background-color: green;
+        p{
+            color: white;
+        }
+        .icon{
+            filter: brightness(10000);
+        }    
+        icon{
+        color: white;
+        }
+
+    }
+
+
+    p{
+        user-select: none;
+        color: white;
+    }
+
+    .icon{
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(24px, 4vw, 28px);
+        aspect-ratio: 1 / 1;
+        flex-shrink: 0;
+        margin-right: 1ch;
+    }
+
+    img{
+        width: 100%;
+    }
+
+    icon{
+        color: black;
+        font-size: 2rem;
+        user-select: none;
+        transition: rotate 0.25s ease-in-out;
+    }
+
+    icon.active{
+        rotate: -180deg;
+    }
+}
+
+.deactive-menu{
+     &:hover {
+        cursor: default;
+        background-color: white;
+        p{
+            color: black;
+        }
+        .icon{
+            filter: brightness(0);
+        }
+
+        icon{
+            color: black !important;
+        }
+
+    }
+}
+
+
+.element-block{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.content-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease-in-out, opacity 1s ease-in-out;
+    opacity: 0;
+
+    &.active{
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+}
+
+.content {
+    overflow: hidden;
+    width: 100%;
+
+    ul{
+        margin-left: 3rem;
+        background-color: aqua;
+    }
+}
+
+

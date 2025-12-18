@@ -1,0 +1,18 @@
+
+<div class="title-wrapper" (click)="toggle()" [class.deactive-menu]="!isMenuActive">
+
+    <div class="element-block">
+    <div class="icon"><img [src]="iconImgSrc" alt="icon für das Accordion-Element"></div>
+    <p>{{title}}</p>
+    </div>
+    @if(isMenuActive){
+        <icon [class.active]="!menuState">keyboard_arrow_down</icon>
+    }
+
+</div>
+
+<div class="content-wrapper" [ngClass]="{'active' :  menuState, 'deactive' : !menuState, 'start': !menuState && !touched}">
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@use "../../../styles/index.scss" as *;
+.navi-button{
+    z-index: 999;
+    width: 48px;
+    height: 48px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: scale 0.25s ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+        scale: 1.075;
+
+        span{
+           background-color: $link-color; 
+        }
+    }
+
+    span{
+        display: block;
+        height: 4px;
+        width: 90%;
+        margin: 4px;
+        background-color: white;
+        transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out, background-color 0.25s ease-in-out;
+    }
+}
+
+.navi-button.open{
+    span:nth-child(2){
+        opacity: 0;
+    }
+    span:nth-child(1){
+        transform: translateY(calc(100% + 8px)) rotate(45deg);
+        
+    } 
+    span:nth-child(3){
+        transform: translateY(calc(-100% - 8px)) rotate(135deg);
+    }
+}

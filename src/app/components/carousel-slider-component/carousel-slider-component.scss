@@ -1,0 +1,72 @@
+@use "./../../../styles/index.scss" as *;
+
+
+:host{
+    --button-width: 32px;
+    --card-min-width: 400px;
+}
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    container-type: inline-size;
+}
+
+.carousel{
+    display: flex;
+    min-height: 150px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    align-items: center;
+    scroll-snap-type: x mandatory;
+    width:var(--card-min-width);
+    
+    @container (min-width: 800px){
+        width:calc(var(--card-min-width) * 2);
+    }
+
+    @container (min-width: 1200px){
+        width:calc(var(--card-min-width) * 3);
+    }
+}
+
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel::scroll-button(right), .carousel::scroll-button(left){
+    font-family: 'Material Symbols Outlined';
+    content: "chevron_left";
+    height: 96px;
+    width: var(--button-width);
+    display: flex;
+    color:$grey-300;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: $paper-color;
+    border: 1px solid $grey-300;
+    font-size: 2rem;
+    border-radius: 8px;
+    position: fixed;
+    position-anchor: --carousel;
+    position-area: left center;
+    translate: 9px;
+    font-weight: 300;
+
+}
+.carousel::scroll-button(right){
+    content: "chevron_right";
+    position-area: right center;
+    translate: -9px;
+;
+}
+
+.carousel::scroll-button(right):disabled, .carousel::scroll-button(left):disabled{
+    background-color: $grey-300;
+    color:$grey-200;
+}
+

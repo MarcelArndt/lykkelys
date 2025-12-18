@@ -1,0 +1,13 @@
+<div class="image-container">
+    @for(imgeUrl of imageUrlArray; track imgeUrl; let index = $index){
+        <div [ngClass]="{
+                'start': index == 0 && isAnimationStarting, 
+                'active': index == currentIndex || index == previousIndex , 
+                'fade-in': index == currentIndex}"
+
+                class="image">
+
+                <img [src]="imgeUrl" alt="Bild im Slider">
+        </div>
+    }
+</div>

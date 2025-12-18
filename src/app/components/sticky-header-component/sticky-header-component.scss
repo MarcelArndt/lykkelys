@@ -1,0 +1,19 @@
+.stick-header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+    transform-origin: top center;
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out, scale 0.25s ease-in-out;
+
+    &.hide{
+         opacity: 0;
+         scale: 1 0;
+    }
+}

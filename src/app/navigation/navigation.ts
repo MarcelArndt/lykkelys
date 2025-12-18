@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationState } from './navigation-state';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Icon } from '../icons/icon/icon';
+import { Icon } from '../components/icon/icon';
 
 @Component({
   selector: 'app-navigation',
